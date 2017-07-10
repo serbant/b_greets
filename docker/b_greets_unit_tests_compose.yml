@@ -1,0 +1,3 @@
+b_greets_unit_tests:
+ build: .
+ dockerfile: Dockerfile.test

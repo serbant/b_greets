@@ -1,0 +1,16 @@
+FROM python:2.7
+
+# get the sources from github
+RUN git clone --progress https://github.com/serbant/b_greets.git /b_greets
+
+WORKDIR /b_greets
+RUN git pull
+RUN git checkout master
+
+
+# make sure all the required python packages are available
+RUN pip install -r requirements.txt
+
+EXPOSE 8888
+CMD [ "python", "./b_greets.py" ]
+

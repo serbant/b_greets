@@ -1,0 +1,5 @@
+b_greets:
+ build: .
+ dockerfile: Dockerfile
+ ports:
+  - "8901:8888"
