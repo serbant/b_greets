@@ -6,6 +6,7 @@ RUN git clone --progress https://github.com/serbant/b_greets.git /b_greets
 WORKDIR /b_greets
 RUN git pull
 RUN git checkout master
+RUN git show
 
 # make sure all the required python packages are available
 RUN pip install -r requirements.txt
