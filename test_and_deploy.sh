@@ -31,7 +31,7 @@ $REMOVE_STACK_CMD
 RESULT=$?
 if [$RESULT -ne 0]; then
     echo "cannot remove the obsolete services"
-    exit 1
+    
 fi
 
 echo "deploying the services using the updated image....."
