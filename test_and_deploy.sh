@@ -4,7 +4,7 @@ TEST_CMD="sudo docker-compose -f ./docker/b_greets_unit_tests_compose.yml  -p un
 
 BUILD_CMD="sudo docker-compose -f ./docker/b_greets_compose.yml up -d --build --force-recreate"
 
-REMOVE_STACK_CMD=="sudo docker stack rm b_greets"
+REMOVE_STACK_CMD="sudo docker stack rm b_greets"
 
 DEPLOY_STACK_CMD="sudo docker stack deploy -c docker/b_greets_services.yml b_greets"
 
@@ -13,7 +13,7 @@ SHOW_CMD="sudo docker ps"
 echo "testing............."
 $TEST_CMD
 RESULT=$?
-if [$RESULT -ne 0]; then
+if [ $RESULT -ne 0 ]; then
     echo "unit test are failing, will not deploy"
     exit 1
 fi
@@ -21,15 +21,16 @@ fi
 echo "rebuilding app image with the latest code.........."
 $BUILD_CMD
 RESULT=$?
-if [$RESULT -ne 0]; then
+if [ $RESULT -ne 0 ]; then
     echo "cannot build the update image"
     exit 1
 fi
 
 echo "remove the services using the obsolete image....."
 $REMOVE_STACK_CMD
+sleep 5
 RESULT=$?
-if [$RESULT -ne 0]; then
+if [ $RESULT -ne 0 ]; then
     echo "cannot remove the obsolete services"
     
 fi
@@ -37,7 +38,7 @@ fi
 echo "deploying the services using the updated image....."
 $DEPLOY_STACK_CMD
 RESULT=$?
-if [$RESULT -ne 0]; then
+if [ $RESULT -ne 0 ]; then
     echo "cannot start the services"
     exit 1
 fi
